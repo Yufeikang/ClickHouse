@@ -54,5 +54,4 @@ jobs:
         with:
           context: docker/server
           push: true
-          tags: |
-            yufeikang/clickhouse:${{ github.sha }}
+          tags: yufeikang/clickhouse:latest
