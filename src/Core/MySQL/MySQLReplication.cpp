@@ -216,6 +216,7 @@ namespace MySQLReplication
                     break;
                 }
                 case MYSQL_TYPE_NEWDECIMAL:
+                case MYSQL_TYPE_JSON:
                 case MYSQL_TYPE_STRING:
                 {
                     /// Big-Endian
@@ -622,6 +623,16 @@ namespace MySQLReplication
                             default:
                                 break;
                         }
+
+                        String val;
+                        val.resize(size);
+                        payload.readStrict(reinterpret_cast<char *>(val.data()), size);
+                        row.push_back(Field{String{val}});
+                        break;
+                    }
+                    case MYSQL_TYPE_JSON: {
+                        UInt32 size = 0;
+                        payload.readStrict(reinterpret_cast<char *>(&size), meta);
 
                         String val;
                         val.resize(size);
