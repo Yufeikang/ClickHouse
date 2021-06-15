@@ -9,10 +9,10 @@
 name: Docker Container Scan (clickhouse-server)
 
 "on":
-  pull_request:
-    paths:
-      - docker/server/Dockerfile
-      - .github/workflows/anchore-analysis.yml
+  # pull_request:
+  #   paths:
+  #     - docker/server/Dockerfile
+  #     - .github/workflows/anchore-analysis.yml
   schedule:
     - cron: '0 21 * * *'
 
