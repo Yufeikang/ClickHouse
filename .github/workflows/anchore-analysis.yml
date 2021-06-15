@@ -13,9 +13,6 @@ name: Docker Container Scan (clickhouse-server)
     paths:
       - docker/server/Dockerfile
       - .github/workflows/anchore-analysis.yml
-  push:
-    branches:
-      - test
   schedule:
     - cron: '0 21 * * *'
 
