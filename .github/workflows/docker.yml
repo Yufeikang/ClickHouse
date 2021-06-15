@@ -29,7 +29,7 @@ jobs:
         run: |
           cd docker/server
           perl -pi -e 's|=\$version||g' Dockerfile
-          docker build . --file Dockerfile --tag docker.pkg.github.com/${{ lowercase(github.repository) }}/clickhouse:${{ github.sha }}
+          docker build . --file Dockerfile --tag docker.pkg.github.com/yufeikang/clickhouse:${{ github.sha }}
   push_to_registry:
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
@@ -50,4 +50,4 @@ jobs:
         with:
           push: true
           tags: |
-            docker.pkg.github.com/${{ github.repository }}/clickhouse:${{ github.sha }}
+            docker.pkg.github.com/yufeikang/clickhouse:${{ github.sha }}
