@@ -20,16 +20,16 @@ name: Docker (clickhouse-server)
     - cron: '0 21 * * *'
 
 jobs:
-  Anchore-Build-Scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: |
-          cd docker/server
-          perl -pi -e 's|=\$version||g' Dockerfile
-          docker build . --file Dockerfile --tag docker.pkg.github.com/yufeikang/clickhouse:${{ github.sha }}
+  # Anchore-Build-Scan:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout the code
+  #       uses: actions/checkout@v2
+  #     - name: Build the Docker image
+  #       run: |
+  #         cd docker/server
+  #         perl -pi -e 's|=\$version||g' Dockerfile
+  #         docker build . --file Dockerfile --tag docker.pkg.github.com/yufeikang/clickhouse:${{ github.sha }}
   push_to_registry:
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
@@ -48,6 +48,7 @@ jobs:
       - name: Build container image
         uses: docker/build-push-action@v2
         with:
+          context: docker/server
           push: true
           tags: |
             docker.pkg.github.com/yufeikang/clickhouse:${{ github.sha }}
